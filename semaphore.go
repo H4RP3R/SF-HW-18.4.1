@@ -13,8 +13,7 @@ type Semaphore struct {
 	// Семафор — абстрактный тип данных,
 	// в нашем случае в основе его лежит канал
 	sem chan int
-	// Время ожидания основных операций с семафором, чтобы не
-	// блокировать
+	// Время ожидания основных операций с семафором, чтобы не блокировать
 	// операции с ним навечно (необязательное требование, зависит от
 	// нужд программы)
 	timeout time.Duration
@@ -41,9 +40,9 @@ func (s *Semaphore) Release() error {
 }
 
 // NewSemaphore — функция создания семафора
-func NewSemaphore(timeout time.Duration) *Semaphore {
+func NewSemaphore(timeout time.Duration, limit int) *Semaphore {
 	return &Semaphore{
-		sem:     make(chan int),
+		sem:     make(chan int, limit),
 		timeout: timeout,
 	}
 }
