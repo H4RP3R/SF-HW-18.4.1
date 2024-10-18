@@ -25,7 +25,7 @@ func (s *Semaphore) Acquire() error {
 	case s.sem <- 0:
 		return nil
 	case <-time.After(s.timeout):
-		return fmt.Errorf("Не удалось захватить семафор")
+		return fmt.Errorf("не удалось захватить семафор")
 	}
 }
 
@@ -35,7 +35,7 @@ func (s *Semaphore) Release() error {
 	case _ = <-s.sem:
 		return nil
 	case <-time.After(s.timeout):
-		return fmt.Errorf("Не удалось освободить семафор")
+		return fmt.Errorf("не удалось освободить семафор")
 	}
 }
 
