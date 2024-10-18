@@ -32,7 +32,7 @@ func (s *Semaphore) Acquire() error {
 // Release — метод освобождения семафора
 func (s *Semaphore) Release() error {
 	select {
-	case _ = <-s.sem:
+	case <-s.sem:
 		return nil
 	case <-time.After(s.timeout):
 		return fmt.Errorf("не удалось освободить семафор")
